@@ -8,8 +8,14 @@ const port = 3333;
 // Import routes
 const indexUser = require("./routes/index")
 
-// Đường dẫn database
-mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true})
+// Kết nối database
+mongoose.connect(process.env.DATABASE_URL, 
+{useNewUrlParser: true, useUnifiedTopology: true}).then(function() {
+    console.log("Successfully connected to the database");    
+}).catch(function(err) {
+    console.log('Could not connect to the database. Exiting now...', err);
+    process.exit();
+});
 
 // Gửi yêu cầu phân tích kiểu nội dung application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))

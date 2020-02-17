@@ -46,9 +46,9 @@ router.post('/login', async function(req, res){
      const passLogin = await bcrypt.compare(req.body.password, userLogin.password);
      if(!passLogin) return res.status(400).send("Mật khẩu không hợp lệ")
 
-     // Tạo token
-     const token = jwt.sign({_id: userLogin._id}, process.env.TOKEN_SECRET)
-     res.header("auth-token", token).send(token);
+     // Ký và tạo token
+     const token = jwt.sign({_id: userLogin._id}, process.env.SECRET_TOKEN)
+    res.header("auth-token", token).send(token);
 })
 
 router.get('/', verify, function(req, res){

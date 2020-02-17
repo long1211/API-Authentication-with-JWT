@@ -2,9 +2,9 @@ const jwt = require("jsonwebtoken")
 
 module.exports = function(req, res, next){
    const token = req.header('auth-token');
-   if(!token) return res.status(401).send("Vui lòng đăng nhập để được truy cập")
+   if(!token) return res.status(401).send("Bạn không thể truy cập vào được")
    try{
-       const checkToken = jwt.verify(token, process.env.TOKEN_SECRET)
+       const checkToken = jwt.verify(token, process.env.SECRET_TOKEN)
        req.user = checkToken
        next()
    }catch(err){
